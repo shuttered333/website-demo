@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Marek Kowalski – Trener Personalny | Katowice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0f0f0f;
+      --white: #fafaf8;
+      --cream: #f2ede4;
+      --accent: #c8a96e;
+      --accent-dark: #a0854a;
+      --mid: #4a4a4a;
+      --light: #8a8a8a;
+      --gap: clamp(3rem, 8vw, 7rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 5vw;
+      background: rgba(15,15,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,169,110,0.18);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent);
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(250,250,248,0.75);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent); color: var(--black);
+      padding: 0.6rem 1.4rem; border-radius: 2px;
+      font-weight: 600; font-size: 0.82rem;
+      text-decoration: none; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent-dark); color: var(--white); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100dvh;
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 5vw 4rem;
+      gap: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 80% 50%, rgba(200,169,110,0.12) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 20% 80%, rgba(200,169,110,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.78rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      font-weight: 600; margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 2rem; height: 1px; background: var(--accent);
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    h1 em { color: var(--accent); font-style: normal; }
+    .hero-sub {
+      font-size: 1.1rem; color: rgba(250,250,248,0.65);
+      max-width: 480px; margin-bottom: 2.5rem;
+      font-weight: 300; line-height: 1.7;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent); color: var(--black);
+      padding: 1rem 2.4rem; border-radius: 2px;
+      font-weight: 700; font-size: 0.9rem;
+      text-decoration: none; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      border: 2px solid var(--accent);
+    }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-secondary {
+      display: inline-block;
+      border: 1.5px solid rgba(250,250,248,0.3); color: rgba(250,250,248,0.7);
+      padding: 0.95rem 2rem; border-radius: 2px;
+      font-weight: 500; font-size: 0.9rem;
+      text-decoration: none; letter-spacing: 0.04em;
+      transition: all 0.2s; margin-left: 1rem;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 3rem;
+      border-top: 1px solid rgba(250,250,248,0.1); padding-top: 2rem;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; color: var(--accent); line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem; color: rgba(250,250,248,0.5);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem;
+    }
+    .hero-visual {
+      position: relative; z-index: 1;
+      display: flex; justify-content: flex-end; align-items: center;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: 4px;
+      padding: 2.5rem;
+      max-width: 340px;
+      width: 100%;
+    }
+    .hero-card-tag {
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.2rem; font-weight: 600;
+    }
+    .hero-card blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; color: var(--white);
+      line-height: 1.5; margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    .hero-card-author {
+      font-size: 0.82rem; color: rgba(250,250,248,0.5);
+    }
+    .hero-card-author strong { color: var(--white); display: block; margin-bottom: 0.2rem; }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: var(--gap) 5vw; }
+    .section-label {
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .section-label::before {
+      content: ''; display: block; width: 1.5rem; height: 1px; background: var(--accent);
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.15; margin-bottom: 1.2rem;
+    }
+    .lead {
+      font-size: 1.1rem; color: var(--mid);
+      max-width: 580px; line-height: 1.75; font-weight: 300;
+    }
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--cream);
+    }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 5rem; align-items: center;
+    }
+    .about-image-wrap {
+      position: relative;
+    }
+    .about-img-placeholder {
+      background: linear-gradient(135deg, #d4c4a8 0%, #c4b090 100%);
+      border-radius: 3px;
+      height: 520px;
+      display: flex; align-items: flex-end;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-img-placeholder::before {
+      content: '👤';
+      font-size: 14rem; position: absolute;
+      top: -1rem; left: 50%; transform: translateX(-50%);
+      opacity: 0.12;
+    }
+    .about-badge {
+      background: var(--black); color: var(--white);
+      padding: 1rem 1.5rem; border-radius: 2px;
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      text-align: center;
+    }
+    .about-badge .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem; color: var(--accent);
+      display: block; line-height: 1;
+    }
+    .about-badge small {
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; opacity: 0.6;
+    }
+    .about-content h2 { margin-bottom: 1.5rem; }
+    .about-content p {
+      color: var(--mid); margin-bottom: 1.2rem;
+      font-size: 1.02rem; line-height: 1.8;
+    }
+    .about-certifications {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;
+    }
+    .cert-badge {
+      background: var(--white); border: 1px solid rgba(0,0,0,0.1);
+      padding: 0.5rem 1rem; border-radius: 2px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--mid);
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--black); }
+    #services h2, #services .section-label { color: var(--white); }
+    #services .lead { color: rgba(250,250,248,0.55); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px; margin-top: 3rem;
+      border: 1.5px solid rgba(200,169,110,0.15);
+    }
+    .service-card {
+      padding: 2.8rem 2.5rem;
+      border: 1px solid rgba(200,169,110,0.12);
+      transition: background 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .service-card:hover { background: rgba(200,169,110,0.05); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      font-size: 1.8rem; margin-bottom: 1.5rem; display: block;
+    }
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .service-tagline {
+      font-size: 0.8rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 1.2rem; font-weight: 600;
+    }
+    .service-desc {
+      color: rgba(250,250,248,0.55); font-size: 0.95rem;
+      line-height: 1.75; margin-bottom: 1.5rem;
+    }
+    .service-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem; color: var(--accent);
+    }
+    .service-price span { font-size: 0.85rem; color: rgba(250,250,248,0.4); font-family: 'DM Sans', sans-serif; }
+    .service-benefits {
+      list-style: none; margin-top: 1.2rem;
+    }
+    .service-benefits li {
+      color: rgba(250,250,248,0.6); font-size: 0.88rem;
+      padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex; gap: 0.6rem; align-items: flex-start;
+    }
+    .service-benefits li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+
+    /* ── WHY US ── */
+    #why { background: var(--white); }
+    .why-grid {
+      display: grid; grid-template-columns: 1.1fr 1fr;
+      gap: 5rem; align-items: center; margin-top: 1rem;
+    }
+    .why-list { list-style: none; margin-top: 2.5rem; }
+    .why-item {
+      display: flex; gap: 1.2rem; padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .why-item:last-child { border-bottom: none; }
+    .why-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; color: var(--accent);
+      line-height: 1; flex-shrink: 0; width: 2.5rem;
+    }
+    .why-title {
+      font-weight: 700; font-size: 1rem;
+      margin-bottom: 0.4rem; color: var(--black);
+    }
+    .why-desc { font-size: 0.93rem; color: var(--mid); line-height: 1.65; }
+    .why-visual {
+      background: var(--cream); border-radius: 4px;
+      padding: 3rem; display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .metric-row {
+      background: var(--white); border-radius: 3px;
+      padding: 1.2rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .metric-label { font-size: 0.85rem; color: var(--mid); }
+    .metric-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--accent);
+    }
+    .metric-bar-wrap {
+      height: 4px; background: rgba(0,0,0,0.08);
+      border-radius: 2px; margin-top: 0.5rem;
+    }
+    .metric-bar { height: 100%; background: var(--accent); border-radius: 2px; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--cream); }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .testi-card {
+      background: var(--white); border-radius: 3px;
+      padding: 2.2rem; position: relative;
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .testi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+    .testi-stars { color: var(--accent); font-size: 1rem; margin-bottom: 1.2rem; letter-spacing: 0.1em; }
+    .testi-quote {
+      font-size: 0.98rem; line-height: 1.75; color: var(--mid);
+      margin-bottom: 1.8rem;
+      font-style: italic;
+    }
+    .testi-quote strong { color: var(--black); font-style: normal; }
+    .testi-author { display: flex; align-items: center; gap: 1rem; }
+    .testi-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .av1 { background: #e8d5b7; }
+    .av2 { background: #d4c4a8; }
+    .av3 { background: #c8b89a; }
+    .testi-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.1rem; }
+    .testi-meta { font-size: 0.78rem; color: var(--light); }
+
+    /* ── CTA SECTION ── */
+    #cta {
+      background: var(--black);
+      text-align: center;
+      padding: var(--gap) 5vw;
+      position: relative; overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(200,169,110,0.15) 0%, transparent 65%);
+    }
+    #cta .container { position: relative; z-index: 1; max-width: 680px; }
+    #cta .section-label { justify-content: center; }
+    #cta h2 { color: var(--white); }
+    #cta p { color: rgba(250,250,248,0.6); margin: 1.2rem auto 2.5rem; font-size: 1.05rem; max-width: 520px; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-light {
+      border: 1.5px solid rgba(250,250,248,0.25);
+      color: rgba(250,250,248,0.7); background: transparent;
+      padding: 0.95rem 2rem; border-radius: 2px;
+      font-weight: 500; font-size: 0.9rem;
+      text-decoration: none; letter-spacing: 0.04em;
+      transition: all 0.2s;
+    }
+    .btn-light:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--white); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.3fr;
+      gap: 5rem; margin-top: 2rem;
+    }
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; margin-bottom: 1.2rem;
+    }
+    .contact-info p { color: var(--mid); margin-bottom: 2rem; line-height: 1.75; }
+    .contact-detail {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .contact-detail:last-child { border-bottom: none; }
+    .contact-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .contact-detail-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--light); margin-bottom: 0.2rem; }
+    .contact-detail-val { font-weight: 600; color: var(--black); }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid); }
+    input, select, textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.1rem;
+      border: 1.5px solid rgba(0,0,0,0.12);
+      border-radius: 2px; background: var(--white);
+      color: var(--black);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 120px; }
+    .form-submit .btn-primary { width: 100%; text-align: center; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 2.5rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(200,169,110,0.12);
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent); font-size: 1.1rem;
+    }
+    footer small { color: rgba(250,250,248,0.3); font-size: 0.78rem; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { color: rgba(250,250,248,0.4); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── HAMBURGER ── */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--white); transition: all 0.3s; display: block; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-text > * { animation: fadeUp 0.7s ease both; }
+    .hero-eyebrow { animation-delay: 0.1s; }
+    h1 { animation-delay: 0.25s; }
+    .hero-sub { animation-delay: 0.4s; }
+    .hero-actions { animation-delay: 0.55s; }
+    .hero-stats { animation-delay: 0.7s; }
+    .hero-visual { animation: fadeUp 0.9s ease 0.6s both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; padding-top: 8rem; }
+      .hero-visual { justify-content: flex-start; }
+      .hero-card { max-width: 100%; }
+      .about-grid, .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-badge { right: 0; bottom: 0; }
+      .services-grid { grid-template-columns: 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">MK Trener</a>
+    <ul class="nav-links">
+      <li><a href="#about">O mnie</a></li>
+      <li><a href="#services">Oferta</a></li>
+      <li><a href="#why">Dlaczego ja</a></li>
+      <li><a href="#testimonials">Opinie</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Bezpłatna konsultacja</a>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Trener Personalny · Katowice</p>
+      <h1>Schudnij raz.<br>Na <em>zawsze.</em></h1>
+      <p class="hero-sub">
+        Bez głodówek, bez morderczych treningów, bez efektu jo-jo.
+        Razem zbuduję dla Ciebie plan, który naprawdę działa — i który możesz utrzymać przez lata.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contact">Zacznij teraz – bezpłatnie</a>
+        <a class="btn-secondary" href="#services">Zobacz ofertę</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">320+</div>
+          <div class="stat-label">Zadowolonych klientów</div>
+        </div>
+        <div>
+          <div class="stat-num">8 lat</div>
+          <div class="stat-label">Doświadczenia</div>
+        </div>
+        <div>
+          <div class="stat-num">92%</div>
+          <div class="stat-label">Osiąga cel w 12 tyg.</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <p class="hero-card-tag">Wynik klienta · 10 tygodni</p>
+        <blockquote>
+          „Schudłam 11 kg i po raz pierwszy w życiu nie boję się bikini."
+        </blockquote>
+        <div class="hero-card-author">
+          <strong>Agnieszka W., 38 lat</strong>
+          Księgowa · Katowice
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-wrap">
+          <div class="about-img-placeholder">
+            <span style="position:relative;z-index:1;color:rgba(0,0,0,0.4);font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;">Zdjęcie trenera</span>
+          </div>
+          <div class="about-badge">
+            <span class="num">320+</span>
+            <small>Klientów</small>
+          </div>
+        </div>
+        <div class="about-content">
+          <p class="section-label">O mnie</p>
+          <h2>Nie jestem trenerem z Instagrama. Jestem trenerem z wynikami.</h2>
+          <p>
+            Przez 8 lat pracowałem z ludźmi, którzy próbowali już wszystkiego — diety pudełkowe,
+            siłownie, aplikacje. I za każdym razem wracali do punktu wyjścia. Wiedziałem, że problem
+            nie leży w nich, ale w podejściu.
+          </p>
+          <p>
+            Moją specjalizacją są osoby po 30-tce, które mają mało czasu, dużo stresu i nie chcą
+            spędzać całego życia na karcie diet. Układam plany, które wpasowują się w Twoje
+            prawdziwe życie — a nie idealne warunki z reklamy.
+          </p>
+          <p>
+            <strong>Moje podejście jest proste:</strong> robimy mniej, ale mądrzej.
+            I właśnie dlatego 9 na 10 moich klientów osiąga cel.
+          </p>
+          <div class="about-certifications">
+            <span class="cert-badge">NSCA-CPT</span>
+            <span class="cert-badge">Dietetyka sportowa</span>
+            <span class="cert-badge">Trener metaboliczny</span>
+            <span class="cert-badge">Coaching zmiany nawyków</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <p class="section-label">Oferta</p>
+      <h2 style="color:var(--white)">Wybierz swój plan</h2>
+      <p class="lead">Każda opcja to kompletny system — nie tylko trening, ale też odżywianie, regeneracja i wsparcie na co dzień.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">⚡</span>
+          <p class="service-tagline">Dla zapracowanych</p>
+          <h3 class="service-name">Fast Track</h3>
+          <p class="service-desc">
+            3 treningi tygodniowo po 45 min. Prosty plan żywieniowy bez liczenia kalorii.
+            Idealny jeśli masz napięty grafik i potrzebujesz konkretnych efektów szybko.
+          </p>
+          <div class="service-price">320 zł <span>/ miesiąc</span></div>
+          <ul class="service-benefits">
+            <li>Plan treningowy na 4 tygodnie</li>
+            <li>Wytyczne żywieniowe bez diety</li>
+            <li>Kontakt przez WhatsApp w tygodniu</li>
+            <li>Comiesięczny przegląd postępów</li>
+          </ul>
+        </div>
+        <div class="service-card" style="background: rgba(200,169,110,0.06); border-color: rgba(200,169,110,0.3);">
+          <span class="service-icon">🎯</span>
+          <p class="service-tagline" style="font-size:0.7rem">Najpopularniejszy wybór</p>
+          <h3 class="service-name">Premium Transformation</h3>
+          <p class="service-desc">
+            Pełna transformacja ciała w 12 tygodniach. Indywidualny trening + dieta + cotygodniowe
+            konsultacje online. To najbardziej kompleksowa opcja dla tych, którzy chcą trwałych zmian.
+          </p>
+          <div class="service-price">580 zł <span>/ miesiąc</span></div>
+          <ul class="service-benefits">
+            <li>Plan treningowy + dieta personalizowana</li>
+            <li>Cotygodniowe konsultacje wideo</li>
+            <li>Dostęp do aplikacji z postępami</li>
+            <li>Wsparcie 7 dni w tygodniu</li>
+            <li>Gwarancja: efekty lub zwrot pieniędzy</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">🏋️</span>
+          <p class="service-tagline">Treningi osobiste</p>
+          <h3 class="service-name">1:1 na sali</h3>
+          <p class="service-desc">
+            Indywidualne treningi w Katowicach. Kontroluję każdy ruch, koryguje technikę
+            i pilnuję, żebyś nie marnował ani minuty na sali. Dla tych, którzy lubią pracować z trenerem na żywo.
+          </p>
+          <div class="service-price">220 zł <span>/ trening</span></div>
+          <ul class="service-benefits">
+            <li>60 minut intensywnej pracy</li>
+            <li>Korekta techniki w czasie rzeczywistym</li>
+            <li>Plan na kolejny tydzień po każdym treningu</li>
+            <li>Pakiety zniżkowe od 8 treningów</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why">
+    <div class="container">
+      <div class="why-grid">
+        <div>
+          <p class="section-label">Dlaczego ja</p>
+          <h2>Znasz to uczucie, gdy program „nie działa"?</h2>
+          <p class="lead">Zwykle problem nie jest w Tobie. Tylko w programie, który nie był szyty na Twoją miarę.</p>
+          <ul class="why-list">
+            <li class="why-item">
+              <span class="why-num">01</span>
+              <div>
+                <div class="why-title">Zero szablonów – wszystko pod Ciebie</div>
+                <div class="why-desc">Twój plan powstaje od zera: uwzględniam Twój grafik, kontuzje, preferencje żywieniowe i to, czego naprawdę nienawidzisz robić.</div>
+              </div>
+            </li>
+            <li class="why-item">
+              <span class="why-num">02</span>
+              <div>
+                <div class="why-title">Wyniki, które widać. Szybko.</div>
+                <div class="why-desc">Pierwsze efekty widoczne już po 3 tygodniach. Nie przez 6 miesięcy — przez 3 tygodnie.</div>
+              </div>
+            </li>
+            <li class="why-item">
+              <span class="why-num">03</span>
+              <div>
+                <div class="why-title">Wsparcie kiedy go potrzebujesz</div>
+                <div class="why-desc">Pytasz o 22:00, bo właśnie masz ochotę na lody? Odpowiadam. To nie jest obsługa klienta — to partnerstwo.</div>
+              </div>
+            </li>
+            <li class="why-item">
+              <span class="why-num">04</span>
+              <div>
+                <div class="why-title">Gwarancja efektów lub zwrot</div>
+                <div class="why-desc">Jeśli po 8 tygodniach nie widzisz postępów mimo stosowania planu, zwracam pieniądze. Bez pytań.</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="why-visual">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1.5rem">Typowe wyniki po 12 tygodniach</h3>
+          <div class="metric-row">
+            <div>
+              <div class="metric-label">Utrata masy ciała</div>
+              <div class="metric-bar-wrap"><div class="metric-bar" style="width:85%"></div></div>
+            </div>
+            <div class="metric-val">-8–14 kg</div>
+          </div>
+          <div class="metric-row">
+            <div>
+              <div class="metric-label">Redukcja tkanki tłuszczowej</div>
+              <div class="metric-bar-wrap"><div class="metric-bar" style="width:78%"></div></div>
+            </div>
+            <div class="metric-val">-4–6%</div>
+          </div>
+          <div class="metric-row">
+            <div>
+              <div class="metric-label">Wzrost siły ogólnej</div>
+              <div class="metric-bar-wrap"><div class="metric-bar" style="width:92%"></div></div>
+            </div>
+            <div class="metric-val">+30–50%</div>
+          </div>
+          <div class="metric-row">
+            <div>
+              <div class="metric-label">Klientów polecających dalej</div>
+              <div class="metric-bar-wrap"><div class="metric-bar" style="width:96%"></div></div>
+            </div>
+            <div class="metric-val">96%</div>
+          </div>
+          <p style="font-size:0.72rem;color:var(--light);margin-top:1rem">* Wyniki indywidualne. Bazują na pomiarach klientów z lat 2022–2024.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="container">
+      <p class="section-label">Opinie</p>
+      <h2>Co mówią moi klienci</h2>
+      <p class="lead">Liczby są ważne. Ale to, co dzieje się w głowie — jest ważniejsze.</p>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            Próbowałem pięciu różnych trenerów przed Markiem. Każdy dawał mi <strong>ten sam szablon z internetu</strong>. Z Markiem po raz pierwszy poczułem, że ktoś naprawdę słucha. W 10 tygodni zrzuciłem 9 kg i teraz biegam 5 km bez zatrzymania — coś, o czym nie śniłem rok temu.
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar av1">👨</div>
+            <div>
+              <div class="testi-name">Tomasz R.</div>
+              <div class="testi-meta">42 lata · Menadżer · -9 kg w 10 tyg.</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            Miałam kontuzję kolana i bałam się, że trening jest dla mnie niemożliwy. Marek ułożył plan, który <strong>całkowicie omijał problem</strong> i jednocześnie wzmocnił mi nogi. Cztery miesiące później: -11 kg i zero bólu. Nie wierzę, że to możliwe.
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar av2">👩</div>
+            <div>
+              <div class="testi-name">Karolina D.</div>
+              <div class="testi-meta">36 lat · Nauczycielka · -11 kg w 4 mies.</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">
+            Pracuję po 10 godzin dziennie. Wcześniej każda dieta rozpadała się po 2 tygodniach, bo <strong>nie miałem czasu</strong>. Marek dał mi plan na 35 minut 3 razy w tygodniu i proste zasady żywieniowe. Rok później utrzymuję wynik i nie myślę już o diecie.
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar av3">👨</div>
+            <div>
+              <div class="testi-name">Piotr K.</div>
+              <div class="testi-meta">44 lata · Przedsiębiorca · -13 kg</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="container">
+      <p class="section-label">Zacznij dziś</p>
+      <h2 style="color:var(--white)">Następna wersja Ciebie zaczyna się jedną rozmową.</h2>
+      <p>Pierwsza konsultacja jest bezpłatna i bez zobowiązań. Porozmawiamy 30 minut — powiesz mi, gdzie jesteś, ja powiem Ci, gdzie możesz być.</p>
+      <div class="cta-buttons">
+        <a class="btn-primary" href="#contact">Umów bezpłatną konsultację</a>
+        <a class="btn-light" href="tel:+48501234567">📞 501 234 567</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Kontakt</p>
+      <h2>Napisz do mnie</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Chętnie odpowiem na każde pytanie.</h3>
+          <p>Nie wiesz, który pakiet wybrać? Masz specyficzną sytuację zdrowotną? Napisz — odpiszę w ciągu 24 godzin, a często szybciej.</p>
+          <div class="contact-detail">
+            <span class="contact-icon">📍</span>
+            <div>
+              <div class="contact-detail-label">Lokalizacja</div>
+              <div class="contact-detail-val">Katowice, Silesia</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-icon">📱</span>
+            <div>
+              <div class="contact-detail-label">Telefon / WhatsApp</div>
+              <div class="contact-detail-val">+48 501 234 567</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-icon">✉️</span>
+            <div>
+              <div class="contact-detail-label">E-mail</div>
+              <div class="contact-detail-val">marek@mktrener.pl</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-icon">🕐</span>
+            <div>
+              <div class="contact-detail-label">Odpowiadam</div>
+              <div class="contact-detail-val">Pon–Sob, 8:00–20:00</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Imię i nazwisko</label>
+                <input type="text" id="name" placeholder="Anna Kowalska">
+              </div>
+              <div class="form-group">
+                <label for="phone">Telefon</label>
+                <input type="tel" id="phone" placeholder="+48 500 000 000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" placeholder="anna@email.pl">
+            </div>
+            <div class="form-group">
+              <label for="goal">Jaki jest Twój główny cel?</label>
+              <select id="goal">
+                <option value="">Wybierz...</option>
+                <option>Chcę schudnąć</option>
+                <option>Chcę zbudować formę</option>
+                <option>Chcę poprawić zdrowie i energię</option>
+                <option>Chcę przygotować się do zawodów</option>
+                <option>Inne</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Coś, co powinienem wiedzieć?</label>
+              <textarea id="message" placeholder="Np. kontuzje, brak czasu, wcześniejsze doświadczenia..."></textarea>
+            </div>
+            <div class="form-submit">
+              <a class="btn-primary" href="mailto:marek@mktrener.pl" style="display:block;text-align:center;padding:1.1rem">
+                Wyślij i umów konsultację →
+              </a>
+            </div>
+            <p style="font-size:0.78rem;color:var(--light);text-align:center">Bezpłatna konsultacja · Bez zobowiązań · Odpowiedź w 24h</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">MK Trener Personalny</span>
+    <small>© 2025 Marek Kowalski. Katowice, Polska.</small>
+    <ul class="footer-links">
+      <li><a href="#about">O mnie</a></li>
+      <li><a href="#services">Oferta</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
